@@ -20,10 +20,17 @@ podTemplate(label: nlabel,
 			
 		stage ('maven build') {
 			container('maven') { 
-				sh ("mvn -DskipTests package -Dsonar.host.url=http://192.168.0.224:9000")
+				sh ("mvn clean install")
 			}
 		}
 		
-
+		
+		stage ('analysis') {
+			container('maven') { 
+				 withSonarQubeEnv('My SonarQube Server') {
+					sh 'mvn clean package sonar:sonar'
+				}
+			}
+		}
 	} 
 } 
