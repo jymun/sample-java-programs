@@ -20,7 +20,7 @@ podTemplate(label: nlabel,
 			
 		stage ('maven build') {
 			container('maven') { 
-				sh ("mvn -DskipTests package")
+				sh ("mvn -DskipTests package" -Dsonar.host.url=http://192.168.0.224:9000)
 			}
 		}
 		
