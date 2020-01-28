@@ -28,7 +28,7 @@ podTemplate(label: nlabel,
 		stage ('analysis') {
 			container('maven') { 
 				 withSonarQubeEnv('My SonarQube Server') {
-					sh 'mvn clean package sonar:sonar'
+					sh ("mvn clean package sonar:sonar -Dsonar.host.url=http://192.168.0.244:9000")
 				}
 			}
 		}
